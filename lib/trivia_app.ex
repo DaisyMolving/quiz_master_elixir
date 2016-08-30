@@ -4,12 +4,16 @@ defmodule TriviaApp do
     IO.gets(question)
   end
 
-  def validate_answer(user_input, correct_answer) do
+  def validate_input(user_input, correct_answer) do
     cond do
-      user_input == correct_answer ->
+      String.equivalent?(user_input, correct_answer) ->
         "add 1 to score, ask next question"
       :else ->
-        IO.puts "incorrect"
+        print_incorrect_message
     end
+  end
+
+  def print_incorrect_message do
+    IO.puts "incorrect"
   end
 end
