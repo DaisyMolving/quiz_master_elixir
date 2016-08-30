@@ -9,5 +9,10 @@ defmodule TriviaAppTest do
     end) == "What's this?"
   end
 
+  test "checks user input against answer" do
+    assert capture_io(fn ->
+      TriviaApp.validate_answer("a", "b")
+    end) =~ "incorrect"
+  end
 
 end
