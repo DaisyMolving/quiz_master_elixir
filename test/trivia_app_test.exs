@@ -21,4 +21,14 @@ defmodule TriviaAppTest do
     end) =~ "next question, your current score is 1"
   end
   
+  test "uses :question as request_answer and :answer as correct_answer from @questions" do
+    questions =  [%{ question: "Samite is a type of what: a) Fabric? b) Stone? c) Dog? d) Cake?", answer: "a" }, %{ question:  "Vermillion is a shade of which colour: Green; Blue; Red; or Yellow?", answer: "c" }]
+    assert capture_io("a", fn ->
+      TriviaApp.ask_question(questions)
+    end) =~ "Samite"
+
+    assert capture_io("a", fn ->
+      TriviaApp.ask_question(questions)
+    end) =~ "correct"
+  end
 end
