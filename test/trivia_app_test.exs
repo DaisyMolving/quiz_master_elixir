@@ -18,7 +18,7 @@ defmodule TriviaAppTest do
   test "validates user input by checking it against answer and increases score if correct" do
     assert capture_io(fn ->
       TriviaApp.validate_input("b", "b", 0)
-    end) =~ "next question, your current score is 1"
+    end) =~ "correct\nYour current score is 1"
   end
   
   test "uses :question as request_answer and :answer as correct_answer from @questions" do
