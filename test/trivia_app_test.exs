@@ -11,17 +11,14 @@ defmodule TriviaAppTest do
 
   test "validates user input by checking it against incorrect answer" do
     assert capture_io(fn ->
-      TriviaApp.validate_input("a", "b")
+      TriviaApp.validate_input("a", "b", 0)
     end) =~ "incorrect"
   end
 
-  test "validates user input by checking it against correct answer" do
+  test "validates user input by checking it against answer and increases score if correct" do
     assert capture_io(fn ->
-      TriviaApp.validate_input("b", "b")
-    end) =~ "next question"
+      TriviaApp.validate_input("b", "b", 0)
+    end) =~ "next question, your current score is 1"
   end
   
-  test "score increases by one" do
-    assert TriviaApp.increase_score(3) == 4
-  end
 end
