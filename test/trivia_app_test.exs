@@ -10,7 +10,7 @@ defmodule TriviaAppTest do
   end
 
   test "validates user input by checking it against incorrect answer" do
-    assert capture_io(fn ->
+    assert capture_io("b\na", fn ->
       TriviaApp.validate_input("a", "b", 0, [%{question: "huh?", answer: "a"}])
     end) =~ "incorrect"
   end
@@ -43,6 +43,12 @@ defmodule TriviaAppTest do
 
   test "given correct answers only, the game ends with a perfect score" do
     assert capture_io("a\nc", fn ->
+      TriviaApp.start_quiz
+    end) =~ "perfect score"
+  end
+
+  test "given incorrect answers, but also given the order to start again, quiz starts again" do
+    assert capture_io("b\ny\na\nc", fn ->
       TriviaApp.start_quiz
     end) =~ "perfect score"
   end

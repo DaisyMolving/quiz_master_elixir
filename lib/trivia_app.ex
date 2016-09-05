@@ -16,7 +16,8 @@ defmodule TriviaApp do
 
   def ask_question([], _), do: perfect_score_message
   def ask_question([current_question | next_questions], score) do
-    validate_input(request_answer(current_question[:question]), current_question[:answer], score, next_questions)
+    request_answer(current_question[:question])
+    |> validate_input(current_question[:answer], score, next_questions)
   end
 
   def request_answer(question) do
@@ -26,11 +27,25 @@ defmodule TriviaApp do
   def validate_input(user_input, correct_answer, score, next_questions) do
     cond do
       String.strip(user_input) == correct_answer ->
-        print_correct_answer_message
-        print_score(score + 1)
-        ask_question(next_questions, score + 1)
+        correct_input_action(score, next_questions)
       :else ->
-        print_incorrect_answer_message
+        incorrect_input_action
+    end
+  end
+
+  defp correct_input_action(score, next_questions) do
+    print_correct_answer_message
+    print_score(score + 1)
+    ask_question(next_questions, score + 1)
+  end
+
+  defp incorrect_input_action do
+    print_incorrect_answer_message
+    cond do
+      String.strip(start_over_message) == "y" ->
+        start_quiz
+      :else ->
+        IO.puts("Goodbye!")
     end
   end
 
@@ -43,11 +58,15 @@ defmodule TriviaApp do
   end
 
   defp print_incorrect_answer_message do
-    IO.puts("OOPS! That answer is incorrect!")
+    IO.puts("OOPS! That answer is incorrect! ")
+  end
+
+  defp start_over_message do
+    IO.gets("Would you like to start again? Type y for yes, or n for no: ")
   end
 
   defp perfect_score_message do
-    IO.puts("Congratulations! You have finished the quiz with a perfect score")
+    IO.puts("Congratulations! You have finished the quiz with a perfect score!")
   end
 
 end
