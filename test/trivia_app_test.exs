@@ -11,24 +11,39 @@ defmodule TriviaAppTest do
 
   test "validates user input by checking it against incorrect answer" do
     assert capture_io(fn ->
-      TriviaApp.validate_input("a", "b", 0)
+      TriviaApp.validate_input("a", "b", 0, [%{question: "huh?", answer: "a"}])
     end) =~ "incorrect"
   end
 
   test "validates user input by checking it against answer and increases score if correct" do
-    assert capture_io(fn ->
-      TriviaApp.validate_input("b", "b", 0)
-    end) =~ "correct\nYour current score is 1"
+    assert capture_io("b\na", fn ->
+      TriviaApp.validate_input("b", "b", 0, [%{question: "huh?", answer: "a"}])
+    end) =~ "correct!\nYour current score is 1"
   end
   
   test "uses :question as request_answer and :answer as correct_answer from @questions" do
-    questions =  [%{ question: "Samite is a type of what: a) Fabric? b) Stone? c) Dog? d) Cake?", answer: "a" }, %{ question:  "Vermillion is a shade of which colour: Green; Blue; Red; or Yellow?", answer: "c" }]
-    assert capture_io("a", fn ->
-      TriviaApp.ask_question(questions)
-    end) =~ "Samite"
+    questions = [
+                %{ question: "Is it a?", answer: "a" }, 
+                %{ question: "Is it b?", answer: "b"}
+                ]
+    assert capture_io("a\nb", fn ->
+      TriviaApp.ask_question(questions, 0)
+    end) =~ "Is it a?"
+  end
 
-    assert capture_io("a", fn ->
-      TriviaApp.ask_question(questions)
-    end) =~ "correct"
+  test "updated score is printed when answer is correct" do
+    questions = [
+                %{ question: "Is it a?", answer: "a" }, 
+                %{ question:  "Is it c?", answer: "c" }
+                ]
+    assert capture_io("a\nc", fn ->
+      TriviaApp.ask_question(questions, 0)
+    end) =~ "2"
+  end
+
+  test "given correct answers only, the game ends with a perfect score" do
+    assert capture_io("a\nc", fn ->
+      TriviaApp.start_quiz
+    end) =~ "perfect score"
   end
 end
