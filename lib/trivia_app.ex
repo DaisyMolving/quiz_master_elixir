@@ -5,8 +5,16 @@ defmodule TriviaApp do
   end
 
   @questions  [
-                %{ question: "Samite is a type of what: a) Fabric? b) Stone? c) Dog? d) Cake?", answer: "a" }, 
-                %{ question:  "Vermillion is a shade of which colour: a) Green? b) Blue? c) Red? d) Yellow?", answer: "c" }
+                %{ question: "Samite is a type of what: \na) Fabric \nb) Stone \nc) Dog \nd) Cake", answer: "a" }, 
+                %{ question:  "Vermillion is a shade of which colour: \na) Green \nb) Blue \nc) Red \nd) Yellow?", answer: "c" },
+                %{ question: "An anemometer is a gauge used for recording the speed of what: \na) Light \nb) Spacecraft \nc) Wind \nd) Athletes", answer: "c"},
+                %{ question: "English novelist William Godwin fathered which novelist daughter: \na) George Eliot \nb) Mary Shelley \nc) Emily Brontë \nd) Jane Austen", answer: "b"},
+                %{ question: "Scurvy is a deficiency in what: \na) Vitamin A \nb) Vitamin B \nc) Vitamin C \nd) Vitamin D", answer: "c"},
+                %{ question: "What does an ornithologist study? \na) Diseases \nb) Ancient Pottery \nc) Birds \nd) Teeth", answer: "c"},
+                %{ question: "What is the scientific name for red blood cells? \na) Erythrocytes \nb) Leukocytes \nc) Thrombocytes \nd) Keratinocytes", answer: "a"}, 
+                %{ question: "What are the names of Mars’ two satellites? \na) Pallas and Vesta \nb) Phobos and Deimos \nc) Ganymede and Callisto \nd) Triton and Nereid", answer: "b"},
+                %{ question: "What is the atomic number for Lithium? \na) 7 \nb) 18 \nc) 3 \nd) 24?", answer: "c"},
+                %{ question: "Asteroids that orbit the sun without crossing Earth’s orbit is are called: \na) Amor \nb) Aten \nc) Apollo \nd) Icarus.", answer: "a"} 
               ]
 
   def start_quiz do

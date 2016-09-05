@@ -42,13 +42,13 @@ defmodule TriviaAppTest do
   end
 
   test "given correct answers only, the game ends with a perfect score" do
-    assert capture_io("a\nc", fn ->
+    assert capture_io("a\nc\nc\nb\nc\nc\na\nb\nc\na", fn ->
       TriviaApp.start_quiz
     end) =~ "perfect score"
   end
 
   test "given incorrect answers, but also given the order to start again, quiz starts again" do
-    assert capture_io("b\ny\na\nc", fn ->
+    assert capture_io("b\ny\na\nc\nc\nb\nc\nc\na\nb\nc\na", fn ->
       TriviaApp.start_quiz
     end) =~ "perfect score"
   end
