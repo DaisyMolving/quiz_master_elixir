@@ -18,6 +18,7 @@ defmodule TriviaApp do
               ]
 
   def start_quiz do
+    introduce_quiz
     score = 0
     ask_question(@questions, score)
   end
@@ -39,6 +40,10 @@ defmodule TriviaApp do
       :else ->
         incorrect_input_action
     end
+  end
+
+  defp introduce_quiz do
+    IO.puts("Welcome to the quiz! Here are your Questions: ")
   end
 
   defp correct_input_action(score, next_questions) do
